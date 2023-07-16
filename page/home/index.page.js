@@ -93,7 +93,7 @@ class Index extends AppPage {
       align_h: hmUI.align.CENTER_H,
     });
 
-    if ((item.type === "light" || item.type === "media_player" || (item.type === "sensor" && !isNaN(item.state))) && item.state != "unavailable") {
+    if ((item.type === "light" || item.type === "media_player" || item.type === "vacuum" || (item.type === "sensor" && !isNaN(item.state))) && item.state != "unavailable") {
       const iconsize = 24
       this.createWidget(hmUI.widget.BUTTON, {
         x: DEVICE_WIDTH - iconsize - 5,

@@ -27,3 +27,6 @@ msgstr "Sensors"
 
 msgid "media_player"
 msgstr "Media players"
+
+msgid "vacuum"
+msgstr "Vacuum cleaners"

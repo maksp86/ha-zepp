@@ -10,6 +10,7 @@ import SensorPage from './sensor/index.page';
 import InfoPage from './info_page/index.page'
 
 import { gettext } from 'i18n'
+import VacuumPage from './vacuum/index.page';
 
 class Router {
   constructor(app) {
@@ -23,6 +24,7 @@ class Router {
       'sensor': SensorPage,
       'test_page': TestPage,
       'info_page': InfoPage,
+      'vacuum': VacuumPage
     };
     this.pageId = 0;
     this.history = [];

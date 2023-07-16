@@ -89,8 +89,7 @@ async function getEnabledSensors() {
   return enabledSensors;
 }
 
-async function getServerInfo()
-{
+async function getServerInfo() {
   const { body } = await request("/api/config");
   const info = typeof body === "string" ? JSON.parse(body) : body;
   return info
@@ -127,6 +126,10 @@ async function getSensorState(entity_id) {
     if (typeof actualSensor.attributes.unit_of_measurement === "string") {
       sensor.unit = actualSensor.attributes.unit_of_measurement;
     }
+
+    if (typeof actualSensor.attributes.supported_features === "number") {
+      sensor.attributes.supported_features = actualSensor.attributes.supported_features
+    }
   }
 
   if (sensor.type === "sensor") {
@@ -146,8 +149,6 @@ async function getSensorState(entity_id) {
 
     if (Array.isArray(actualSensor.attributes.effect_list))
       sensor.attributes.effect_list = actualSensor.attributes.effect_list
-
-    sensor.attributes.supported_features = actualSensor.attributes.supported_features
   }
 
   if (sensor.type === "media_player") {
@@ -170,8 +171,17 @@ async function getSensorState(entity_id) {
 
     if (typeof actualSensor.attributes.media_artist === "string")
       sensor.attributes.media_artist = actualSensor.attributes.media_artist
+  }
 
-    sensor.attributes.supported_features = actualSensor.attributes.supported_features
+  if (sensor.type === "vacuum") {
+    if (Array.isArray(actualSensor.attributes.is_volume_muted))
+      sensor.attributes.fan_speed_list = actualSensor.attributes.fan_speed_list
+
+    if (typeof actualSensor.attributes.fan_speed === "string")
+      sensor.attributes.fan_speed = actualSensor.attributes.fan_speed
+
+    if (typeof actualSensor.attributes.battery_level === "number")
+      sensor.attributes.battery_level = actualSensor.attributes.battery_level
   }
 
   return sensor

@@ -54,7 +54,7 @@ AppSettingsPage({
 
     let sensorsList = [];
 
-    const supportedTypes = ['light', 'switch', 'binary_sensor', 'sensor', 'media_player']
+    const supportedTypes = ['light', 'switch', 'binary_sensor', 'sensor', 'media_player', 'vacuum']
     var filteredSensors = this.state.sensorsList.filter((item) => supportedTypes.includes(item.key.split('.')[0]))
 
     var grouped = filteredSensors.reduce((arr, item) => {

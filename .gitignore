@@ -13,3 +13,5 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+mqtt_secrets.py
+__pycache__

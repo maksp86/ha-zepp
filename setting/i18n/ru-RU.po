@@ -27,3 +27,6 @@ msgstr "Сенсоры"
 
 msgid "media_player"
 msgstr "Медиаустройства"
+
+msgid "vacuum"
+msgstr "Пылесосы"
