@@ -174,7 +174,7 @@ async function getSensorState(entity_id) {
   }
 
   if (sensor.type === "vacuum") {
-    if (Array.isArray(actualSensor.attributes.is_volume_muted))
+    if (Array.isArray(actualSensor.attributes.fan_speed_list))
       sensor.attributes.fan_speed_list = actualSensor.attributes.fan_speed_list
 
     if (typeof actualSensor.attributes.fan_speed === "string")
@@ -243,6 +243,16 @@ AppSideService({
       }
       if (payload.method === "LIGHT_SET") {
         await request(`/api/services/${payload.service}/turn_on`, {
+          method: "POST",
+          body: JSON.stringify({
+            entity_id: payload.entity_id,
+            ...JSON.parse(payload.value)
+          }),
+        });
+        ctx.response({ data: { result: [] } });
+      }
+      if (payload.method === "VACUUM_SET") {
+        await request(`/api/services/vacuum/${payload.service}`, {
           method: "POST",
           body: JSON.stringify({
             entity_id: payload.entity_id,

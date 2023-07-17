@@ -17,7 +17,6 @@ class EffectPicker extends AppPage {
     super(...props);
     this.state.item = null;
     this.state.rendered = false;
-    this.state.reloadTimer = null;
   }
   addWidget(widget) {
     this.app.widgets.push(...widget);

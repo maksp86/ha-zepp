@@ -109,3 +109,23 @@ msgstr "# weeks ago"
 msgid "longago"
 msgstr "long ago"
 
+msgid "fanspeed"
+msgstr "Fan speed:"
+
+msgid "cleaning"
+msgstr "Cleaning"
+
+msgid "paused"
+msgstr "Paused"
+
+msgid "idle"
+msgstr "Idle"
+
+msgid "docked"
+msgstr "Docked"
+
+msgid "returning"
+msgstr "Returning to base"
+
+msgid "error"
+msgstr "Error"

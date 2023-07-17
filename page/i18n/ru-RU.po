@@ -109,3 +109,23 @@ msgstr "# недель назад"
 msgid "longago"
 msgstr "давно"
 
+msgid "fanspeed"
+msgstr "Fan speed:"
+
+msgid "cleaning"
+msgstr "Уборка"
+
+msgid "paused"
+msgstr "Пауза"
+
+msgid "idle"
+msgstr "Бездействие"
+
+msgid "docked"
+msgstr "У док-станции"
+
+msgid "returning"
+msgstr "Возвращается к док-станции"
+
+msgid "error"
+msgstr "Ошибка"

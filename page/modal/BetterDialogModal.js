@@ -29,6 +29,7 @@ class BetterDialogModal extends Modal {
     onShow() {
         if (this.app.router.isModalShown()) return
         super.onShow()
+        hmApp.setLayerY(0)
 
         var buttonHeight = 0;
 

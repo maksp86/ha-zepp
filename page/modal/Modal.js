@@ -28,6 +28,7 @@ class Modal {
     onHide() {
         this.app.setLayerScrolling(this.lastLayerScrolling)
         hmUI.deleteWidget(this.backgroundRectangle)
+        
     }
 }
 

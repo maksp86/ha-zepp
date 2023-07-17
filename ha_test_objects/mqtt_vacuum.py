@@ -38,7 +38,7 @@ client = mqtt.Client(UNIQUE_ID)
 client.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
 client.will_set(AVAILABILITY_TOPIC, 'offline', retain=True)
 
-# states
+# states:
 # cleaning
 # docked
 # paused
@@ -67,6 +67,7 @@ def cancel_timer():
 
 def on_timer():
     device_state["state"] = "docked"
+    device_state["battery_level"] = random.randint(0, 100)
     client.publish(STATE_TOPIC, json.dumps(device_state))
     cancel_timer()
     pass
@@ -101,6 +102,7 @@ def on_message(client: mqtt.Client, userdata, message: mqtt.MQTTMessage):
                 rettimer = threading.Timer(random.randint(10, 30), on_timer)
                 rettimer.start()
 
+    device_state["battery_level"] = random.randint(0, 100)
     client.publish(STATE_TOPIC, json.dumps(device_state))
 
 
