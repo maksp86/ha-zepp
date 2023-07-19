@@ -64,9 +64,8 @@ class VacuumPage extends AppPage {
                 else
                     this.updateElements()
             })
-            .catch((res) => {
-                this.drawError();
-                logger.log(res);
+            .catch((e) => {
+                this.drawError(e);
             });
     }
 

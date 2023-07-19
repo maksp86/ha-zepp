@@ -26,16 +26,56 @@ class SelectModal extends Modal {
         this.props = { title, text, options }
         this.callback = callback
         this.callbackArg = callbackArg
+
+        this.state.dataList = options.map((item) => {
+            return { name: item };
+        });
     }
 
     setOption(option) {
         this.state.option = option
+
+        if (this.state.rendered)
+            this.scrollListItemClick(this.props.options.indexOf(option), false)
+    }
+
+    scrollListItemClick(index, isUserInput) {
+        this.controls.currentOption.setProperty(hmUI.prop.TEXT, this.props.options[index]);
+
+        this.controls.scrollList.setProperty(hmUI.prop.UPDATE_DATA, {
+            data_type_config: [
+                {
+                    start: 0,
+                    end: index - 1,
+                    type_id: 0,
+                },
+                {
+                    start: index,
+                    end: index,
+                    type_id: 1,
+                },
+                {
+                    start: index + 1,
+                    end: this.state.dataList.length,
+                    type_id: 0,
+                },
+            ],
+            data_type_config_count: 3,
+            data_array: this.state.dataList,
+            data_count: this.state.dataList.length,
+            on_page: 1,
+        });
+
+        if (this.state.rendered && isUserInput) {
+            this.callback(this.props.options[index], this.callbackArg)
+        }
     }
 
     onShow() {
         if (this.app.router.isModalShown()) return
         super.onShow()
 
+        this.state.y = TOP_BOTTOM_OFFSET;
         this.state.rendered = false;
 
         const titleHeight = 40;
@@ -74,42 +114,6 @@ class SelectModal extends Modal {
             align_h: hmUI.align.RIGHT,
         });
         this.state.y += 32;
-
-        const dataList = this.props.options.map((item) => {
-            return { name: item };
-        });
-
-        function scrollListItemClick(list, index, ctx) {
-            ctx.controls.currentOption.setProperty(hmUI.prop.TEXT, dataList[index].name);
-
-            list.setProperty(hmUI.prop.UPDATE_DATA, {
-                data_type_config: [
-                    {
-                        start: 0,
-                        end: index - 1,
-                        type_id: 0,
-                    },
-                    {
-                        start: index,
-                        end: index,
-                        type_id: 1,
-                    },
-                    {
-                        start: index + 1,
-                        end: dataList.length,
-                        type_id: 0,
-                    },
-                ],
-                data_type_config_count: 3,
-                data_array: dataList,
-                data_count: dataList.length,
-                on_page: 1,
-            });
-
-            if (ctx.state.rendered) {
-                ctx.callback(dataList[index].name, ctx.callbackArg)
-            }
-        }
 
         this.controls.scrollList = hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
             x: 10,
@@ -156,27 +160,21 @@ class SelectModal extends Modal {
                 },
             ],
             item_config_count: 2,
-            data_array: dataList,
-            data_count: dataList.length,
+            data_array: this.state.dataList,
+            data_count: this.state.dataList.length,
             item_click_func: (list, index) =>
-                scrollListItemClick(list, index, this),
+                this.scrollListItemClick(index, true),
             data_type_config_count: 1,
         });
 
-        scrollListItemClick(
-            this.controls.scrollList,
-            this.props.options.indexOf(
-                this.state.option
-            ),
-            this
-        );
+        this.scrollListItemClick(this.props.options.indexOf(this.state.option));
 
         this.state.rendered = true;
     }
 
     onHide() {
         if (!this.app.router.isModalShown()) return
-
+        this.state.rendered = false;
         hmUI.deleteWidget(this.controls.title)
         hmUI.deleteWidget(this.controls.text)
         hmUI.deleteWidget(this.controls.currentOption)
