@@ -24,6 +24,8 @@ class Router {
       'sensor': SensorPage,
       'test_page': TestPage,
       'info_page': InfoPage,
+      'input_button': SensorPage,
+      'scene': SensorPage,
       'vacuum': VacuumPage
     };
     this.pageId = 0;

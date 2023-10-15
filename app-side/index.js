@@ -134,6 +134,9 @@ async function getSensorState(entity_id) {
 
   if (sensor.type === "sensor") {
     sensor.attributes.device_class = actualSensor.attributes.device_class
+  }
+
+  if (["sensor", "scene", "input_button"].includes(sensor.type)) {
     sensor.last_changed = actualSensor.last_changed
   }
 
@@ -267,6 +270,32 @@ AppSideService({
           body: JSON.stringify({
             entity_id: payload.entity_id,
             ...JSON.parse(payload.value)
+          }),
+        });
+        ctx.response({ data: { result: [] } });
+      }
+      if (payload.method === "TURN_ON_SCENE") {
+        let service = "scene";
+        if (payload.service) {
+          service = payload.service;
+        }
+        await request(`/api/services/${service}/turn_on`, {
+          method: "POST",
+          body: JSON.stringify({
+            entity_id: payload.entity_id,
+          }),
+        });
+        ctx.response({ data: { result: [] } });
+      }
+      if (payload.method === "PRESS_INPUT_BUTTON") {
+        let service = "input_button";
+        if (payload.service) {
+          service = payload.service;
+        }
+        await request(`/api/services/${service}/press`, {
+          method: "POST",
+          body: JSON.stringify({
+            entity_id: payload.entity_id,
           }),
         });
         ctx.response({ data: { result: [] } });

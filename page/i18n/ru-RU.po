@@ -68,7 +68,7 @@ msgid "brightness"
 msgstr "Яркость:"
 
 msgid "updated"
-msgstr "ОБновлено:"
+msgstr "Обновл.:"
 
 msgid "senshist"
 msgstr "История:"

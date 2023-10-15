@@ -66,6 +66,12 @@ class Index extends AppPage {
   toggleSwitchable(item, value) {
     messageBuilder.request({ method: "TOGGLE_SWITCH", entity_id: item.key, value, service: item.type });
   }
+  turnOnScene(item, value) {
+    messageBuilder.request({ method: "TURN_ON_SCENE", entity_id: item.key, value, service: item.type });
+  }
+  pressInputButton(item, value) {
+    messageBuilder.request({ method: "PRESS_INPUT_BUTTON", entity_id: item.key, value, service: item.type });
+  }
   createSensor(item) {
     const titleHeight = 32;
     const valueHeight = 32;
@@ -157,6 +163,51 @@ class Index extends AppPage {
     }
     this.state.y += totalHeight;
   }
+  createButton(item, onClickCallback) {
+    const valueHeight = 32;
+    const buttonBorder = 10;
+    const sensorGap = 10;
+    const buttonHeight = valueHeight + buttonBorder;
+    const totalHeight = valueHeight + buttonBorder + sensorGap;
+    const iconsize = 24;
+    const iconBorder = (totalHeight - iconsize) / 2;
+
+    this.createWidget(hmUI.widget.BUTTON, {
+      x: 0,
+      y: this.state.y + buttonBorder / 2,
+      w: DEVICE_WIDTH - iconsize - iconBorder,
+      h: buttonHeight,
+      text: item.title,
+      radius: buttonHeight / 2,
+      normal_color: BUTTON_COLOR_NORMAL,
+      press_color: BUTTON_COLOR_PRESSED,
+      click_func: onClickCallback,
+    });
+    this.createWidget(hmUI.widget.BUTTON, {
+      x: DEVICE_WIDTH - iconsize - iconBorder,
+      y: this.state.y + buttonHeight / 2 - iconsize / 2,
+      w: iconsize,
+      h: iconsize,
+      press_src: "forward24.png",
+      normal_src: "forward24.png",
+      click_func: () => {
+        this.router.go(item.type, item);
+      },
+    });
+    this.state.y += totalHeight;
+  }
+  createScene(item) {
+    this.createButton(item, () => {
+      if (!this.state.rendered) return;
+        this.turnOnScene(item);
+      });
+  }
+  createInputButton(item) {
+    this.createButton(item, () => {
+      if (!this.state.rendered) return;
+        this.pressInputButton(item);
+      });
+  }
   createElement(item) {
     if (item === "end") {
       let elem = this.createWidget(hmUI.widget.BUTTON, {
@@ -178,6 +229,18 @@ class Index extends AppPage {
       item.state !== "unavailable"
     ) {
       return this.createSwitchable(item);
+    }
+    if (
+      ["scene"].includes(item.type) &&
+      item.state !== "unavailable"
+    ) {
+      return this.createScene(item);
+    }
+    if (
+      ["input_button"].includes(item.type) &&
+      item.state !== "unavailable"
+    ) {
+      return this.createInputButton(item);
     }
     return this.createSensor(item);
   }
