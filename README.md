@@ -60,3 +60,19 @@ Application that allows you to control a smart home based on the Home Assistant
 #### Home Assistant
 - Long-lived access token (you can generate it on your-ha-instance.local/profile page)
 - "If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file."
+
+### TLDR
+#### Install the requirements and ZEPP SDK
+- Register an account at [Open Platform](https://user.zepp.com/universalLogin/index.html#/register?project_name=open_platform&project_redirect_uri=https%3A%2F%2Fconsole.zepp.com%2F%23%2F&platform_app=com.huami.webapp)
+- Install Node and NPM (follow your distribution guidelines to install it, you should have working 'npm' command)
+- Run `sudo npm install @zeppos/zeus-cl -G` to install `zeus` tool
+#### Build and install the app
+- Run `zeus preview` in this repository's root directory (where this file is placed)
+- Sign in to your Open Platform account at the page opened by `zeus preview` command (you should do this just once)
+- If the build was successful - you will see a short-lived (2 hours) QR code
+- Scan the code using Zepp app to install it to your device
+#### Debug the app (check logs)
+- Follow the [official debugging guide](https://docs-testing.zepp.com/docs/v2/guides/best-practice/debug/)
+- As the last resort follow [View real machine logs](https://docs-testing.zepp.com/docs/v2/guides/tools/zepp-app/#view-real-machine-logs) guide for logs and do debugging-by-logging
+#### Develop the app
+- Check [ZEPP SDK documentation](https://docs.zepp.com/docs/reference/app-json/) for SDK usage information and code examples
