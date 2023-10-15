@@ -52,7 +52,7 @@ Application that allows you to control a smart home based on the Home Assistant
 
 ### Preparations
 #### Mi Band 7
-- [Modified Zepp App](https://4pda.to/forum/index.php?showtopic=797981&st=15700#entry122653549) (registration required)
+- [Modified Zepp App (France for Smart Band 7)](https://4pda.to/forum/index.php?showtopic=797981&st=16040#entry123924881) (registration required for downloading)
 - You need to connect Mi Band 7 to Modified Zepp App the same way you would with Zepp Life (google auth is not  supported)
 - You need to enable [Developer Mode](https://docs.zepp.com/docs/1.0/guides/tools/zepp-app/) in app
 - Install app with QR-code (soon) or build yourself
