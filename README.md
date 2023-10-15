@@ -6,6 +6,7 @@ Application that allows you to control a smart home based on the Home Assistant
 - Toggle switch
 - Toggle light, change its effect, brightness and color (if this possible)
 - Media player support with play/pause, prev/next, volume control
+- Vacuum robots support (cleaning status, battery monitoring, start/pause/stop global cleaning, locate vacuum and send it back to dock)
 
 ## Screenshots  
 ![image](images/1.png)  
@@ -24,6 +25,10 @@ Application that allows you to control a smart home based on the Home Assistant
 <details>
   <summary>Sensor</summary>
   <img src="images/4.png">
+</details>
+<details>
+  <summary>Vacuum (TODO: Add screenshots)</summary>
+  <img src="images/5.png">
 </details>
 
 ### To Do:

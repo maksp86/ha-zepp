@@ -11,7 +11,7 @@ msgid "sensrefresh"
 msgstr "Refresh sensors"
 
 msgid "supportedentities"
-msgstr "Only media players, light, switches and sensors are supported for now:"
+msgstr "Only media players, light, switches, vacuums and sensors are supported for now:"
 
 msgid "light"
 msgstr "Lightening"
